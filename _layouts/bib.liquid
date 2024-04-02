@@ -14,7 +14,7 @@
             path=entry_path
             sizes = "200px"
             class="preview z-depth-1 rounded"
-            zoomable=false
+            zoomable=false{{ reference | replace_first: 'Vincent R Meijer', '<b>Vincent R Meijer</b>' }} 
             alt=entry.preview
           %}
         {% endif %}
@@ -54,8 +54,8 @@
       {%- for author in entry.author_array limit: author_array_limit -%}
         {% assign author_is_self = false %}
         {%- assign author_last_name = author.last | remove: '¶' | remove: '&' | remove: '*' | remove: '†' | remove: '^' -%}
-        {% if site.scholar.last_name contains author_last_name %}
-          {% if site.scholar.first_name contains author.first %}
+        {% if author_last_name contains 'Meijer' %}
+          {% if author.first contains 'Vincent' %}
             {% assign author_is_self = true %}
           {% endif %}
         {%- endif -%}
