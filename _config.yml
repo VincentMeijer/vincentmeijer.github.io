@@ -67,7 +67,7 @@ og_image: # The site-wide (default for all links) Open Graph preview image
 # Social integration
 # -----------------------------------------------------------------------------
 
-github_username: # your GitHub user name
+github_username: VincentMeijer # your GitHub user name
 gitlab_username: # your GitLab user name
 x_username: # your X handle
 mastodon_username: # your mastodon instance+username in the format instance.tld/@username
@@ -307,10 +307,13 @@ scholar:
   details_link: Details
 
   query: "@*"
-  group_by: year
+  # These are reversed, to work with group_order. Article will be shown first.
+  type_order: [inproceedings, article]
+  group_by: type, year
   group_order: descending
+  type_names: { inproceedings: 'Conference papers and presentations' }
 
-# Display different badges withs stats for your publications
+# Display different badges with stats for your publications
 enable_publication_badges:
   altmetric: true # Altmetric badge (https://www.altmetric.com/products/altmetric-badges/)
   dimensions: true # Dimensions badge (https://badge.dimensions.ai/)
