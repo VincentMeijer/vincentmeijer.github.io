@@ -1,46 +1,46 @@
 {
-  "_framework-CGFlyzBG.js": {
-    "file": "vincent-meijer-academic-website/_next/static/chunks/framework-CGFlyzBG.js",
+  "_framework-D_rUT4EX.js": {
+    "file": "_next/static/chunks/framework-D_rUT4EX.js",
     "name": "framework",
     "imports": [
-      "_rolldown-runtime-DTtfIC_W.js"
+      "_rolldown-runtime-C60lm6uB.js"
     ]
   },
-  "_navigation-errors-C1OAsc7y.js": {
-    "file": "vincent-meijer-academic-website/_next/static/chunks/navigation-errors-C1OAsc7y.js",
+  "_navigation-errors-By4dF-Cc.js": {
+    "file": "_next/static/chunks/navigation-errors-By4dF-Cc.js",
     "name": "navigation-errors",
     "imports": [
-      "_rolldown-runtime-DTtfIC_W.js",
-      "_framework-CGFlyzBG.js"
+      "_rolldown-runtime-C60lm6uB.js",
+      "_framework-D_rUT4EX.js"
     ]
   },
-  "_rolldown-runtime-DTtfIC_W.js": {
-    "file": "vincent-meijer-academic-website/_next/static/chunks/rolldown-runtime-DTtfIC_W.js",
+  "_rolldown-runtime-C60lm6uB.js": {
+    "file": "_next/static/chunks/rolldown-runtime-C60lm6uB.js",
     "name": "rolldown-runtime"
   },
   "components/site-navigation.tsx": {
-    "file": "vincent-meijer-academic-website/_next/static/chunks/site-navigation-gyppw2aN.js",
+    "file": "_next/static/chunks/site-navigation-2-xpMLTE.js",
     "name": "site-navigation",
     "src": "components/site-navigation.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_rolldown-runtime-DTtfIC_W.js",
+      "_rolldown-runtime-C60lm6uB.js",
       "virtual:vinext-app-browser-entry",
-      "_framework-CGFlyzBG.js"
+      "_framework-D_rUT4EX.js"
     ]
   },
   "node_modules/lucide-react/dist/esm/Icon.mjs": {
-    "file": "vincent-meijer-academic-website/_next/static/chunks/Icon-CVSTWDgi.js",
+    "file": "_next/static/chunks/Icon-Dm7gN3CH.js",
     "name": "Icon",
     "src": "node_modules/lucide-react/dist/esm/Icon.mjs",
     "isDynamicEntry": true,
     "imports": [
-      "_rolldown-runtime-DTtfIC_W.js",
-      "_framework-CGFlyzBG.js"
+      "_rolldown-runtime-C60lm6uB.js",
+      "_framework-D_rUT4EX.js"
     ]
   },
   "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js": {
-    "file": "vincent-meijer-academic-website/_next/static/chunks/app-route-prefetch-policy-BTiqVVnn.js",
+    "file": "_next/static/chunks/app-route-prefetch-policy-CsCJrlOV.js",
     "name": "app-route-prefetch-policy",
     "src": "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js",
     "isDynamicEntry": true,
@@ -49,36 +49,36 @@
     ]
   },
   "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "vincent-meijer-academic-website/_next/static/chunks/layout-segment-context-wkyoSLg6.js",
+    "file": "_next/static/chunks/layout-segment-context-BuCnXghp.js",
     "name": "layout-segment-context",
     "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
     "isDynamicEntry": true,
     "imports": [
-      "_rolldown-runtime-DTtfIC_W.js",
+      "_rolldown-runtime-C60lm6uB.js",
       "virtual:vinext-app-browser-entry",
-      "_framework-CGFlyzBG.js",
-      "_navigation-errors-C1OAsc7y.js"
+      "_framework-D_rUT4EX.js",
+      "_navigation-errors-By4dF-Cc.js"
     ]
   },
   "node_modules/vinext/dist/shims/streamed-icons.js": {
-    "file": "vincent-meijer-academic-website/_next/static/chunks/streamed-icons-X9Q7HLcw.js",
+    "file": "_next/static/chunks/streamed-icons-Cs-m6aYg.js",
     "name": "streamed-icons",
     "src": "node_modules/vinext/dist/shims/streamed-icons.js",
     "isDynamicEntry": true,
     "imports": [
-      "_rolldown-runtime-DTtfIC_W.js",
-      "_framework-CGFlyzBG.js"
+      "_rolldown-runtime-C60lm6uB.js",
+      "_framework-D_rUT4EX.js"
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "vincent-meijer-academic-website/_next/static/chunks/index-Dkw8dxPG.js",
+    "file": "_next/static/chunks/index-Db0Hy1zq.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,
     "imports": [
-      "_rolldown-runtime-DTtfIC_W.js",
-      "_framework-CGFlyzBG.js",
-      "_navigation-errors-C1OAsc7y.js"
+      "_rolldown-runtime-C60lm6uB.js",
+      "_framework-D_rUT4EX.js",
+      "_navigation-errors-By4dF-Cc.js"
     ],
     "dynamicImports": [
       "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js",
