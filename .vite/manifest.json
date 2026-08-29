@@ -1,0 +1,92 @@
+{
+  "_framework-CGFlyzBG.js": {
+    "file": "vincent-meijer-academic-website/_next/static/chunks/framework-CGFlyzBG.js",
+    "name": "framework",
+    "imports": [
+      "_rolldown-runtime-DTtfIC_W.js"
+    ]
+  },
+  "_navigation-errors-C1OAsc7y.js": {
+    "file": "vincent-meijer-academic-website/_next/static/chunks/navigation-errors-C1OAsc7y.js",
+    "name": "navigation-errors",
+    "imports": [
+      "_rolldown-runtime-DTtfIC_W.js",
+      "_framework-CGFlyzBG.js"
+    ]
+  },
+  "_rolldown-runtime-DTtfIC_W.js": {
+    "file": "vincent-meijer-academic-website/_next/static/chunks/rolldown-runtime-DTtfIC_W.js",
+    "name": "rolldown-runtime"
+  },
+  "components/site-navigation.tsx": {
+    "file": "vincent-meijer-academic-website/_next/static/chunks/site-navigation-gyppw2aN.js",
+    "name": "site-navigation",
+    "src": "components/site-navigation.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-DTtfIC_W.js",
+      "virtual:vinext-app-browser-entry",
+      "_framework-CGFlyzBG.js"
+    ]
+  },
+  "node_modules/lucide-react/dist/esm/Icon.mjs": {
+    "file": "vincent-meijer-academic-website/_next/static/chunks/Icon-CVSTWDgi.js",
+    "name": "Icon",
+    "src": "node_modules/lucide-react/dist/esm/Icon.mjs",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-DTtfIC_W.js",
+      "_framework-CGFlyzBG.js"
+    ]
+  },
+  "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js": {
+    "file": "vincent-meijer-academic-website/_next/static/chunks/app-route-prefetch-policy-BTiqVVnn.js",
+    "name": "app-route-prefetch-policy",
+    "src": "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "virtual:vinext-app-browser-entry"
+    ]
+  },
+  "node_modules/vinext/dist/shims/layout-segment-context.js": {
+    "file": "vincent-meijer-academic-website/_next/static/chunks/layout-segment-context-wkyoSLg6.js",
+    "name": "layout-segment-context",
+    "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-DTtfIC_W.js",
+      "virtual:vinext-app-browser-entry",
+      "_framework-CGFlyzBG.js",
+      "_navigation-errors-C1OAsc7y.js"
+    ]
+  },
+  "node_modules/vinext/dist/shims/streamed-icons.js": {
+    "file": "vincent-meijer-academic-website/_next/static/chunks/streamed-icons-X9Q7HLcw.js",
+    "name": "streamed-icons",
+    "src": "node_modules/vinext/dist/shims/streamed-icons.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-DTtfIC_W.js",
+      "_framework-CGFlyzBG.js"
+    ]
+  },
+  "virtual:vinext-app-browser-entry": {
+    "file": "vincent-meijer-academic-website/_next/static/chunks/index-Dkw8dxPG.js",
+    "name": "index",
+    "src": "virtual:vinext-app-browser-entry",
+    "isEntry": true,
+    "imports": [
+      "_rolldown-runtime-DTtfIC_W.js",
+      "_framework-CGFlyzBG.js",
+      "_navigation-errors-C1OAsc7y.js"
+    ],
+    "dynamicImports": [
+      "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js",
+      "virtual:vinext-app-browser-entry",
+      "node_modules/vinext/dist/shims/layout-segment-context.js",
+      "node_modules/lucide-react/dist/esm/Icon.mjs",
+      "components/site-navigation.tsx",
+      "node_modules/vinext/dist/shims/streamed-icons.js"
+    ]
+  }
+}
