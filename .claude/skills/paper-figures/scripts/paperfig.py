@@ -193,15 +193,23 @@ def colorbar(fig, mappable, ax=None, label="", cax=None, side="right",
     """Slim colourbar, ticks out, no outline box.
 
     Placed as an inset of `ax` (works with fixed-aspect map axes and any layout),
-    or drawn into an explicit `cax`. side: "right" or "bottom".
+    or drawn into an explicit `cax`. side: "right" or "bottom". A list/array of
+    axes gets one shared colourbar taken from the layout.
     """
-    if cax is None:
+    if cax is None and isinstance(ax, (list, tuple, np.ndarray)):
+        kw.setdefault("fraction", 0.035); kw.setdefault("pad", pad); kw.setdefault("aspect", 30)
+        if side == "bottom":
+            kw.setdefault("location", "bottom")
+        cb = fig.colorbar(mappable, ax=ax, **kw)
+    elif cax is None:
         if side == "right":
             cax = ax.inset_axes([1 + pad, 0, width, 1])
         else:
             cax = ax.inset_axes([0, -pad - width * 3 - 0.08, 1, width * 1.6])
             kw.setdefault("orientation", "horizontal")
-    cb = fig.colorbar(mappable, cax=cax, **kw)
+        cb = fig.colorbar(mappable, cax=cax, **kw)
+    else:
+        cb = fig.colorbar(mappable, cax=cax, **kw)
     cb.outline.set_visible(False)
     cb.ax.tick_params(width=0.5, length=2, which="major")
     cb.ax.minorticks_off()
