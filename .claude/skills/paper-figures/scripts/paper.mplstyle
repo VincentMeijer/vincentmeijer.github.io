@@ -71,7 +71,7 @@ legend.columnspacing : 1.0
 # --- output: vector PDF with embedded TrueType text (editable, crisp)
 figure.dpi           : 150
 savefig.dpi          : 600
-savefig.bbox         : tight
+savefig.bbox         : standard   # keep the exact journal width; constrained layout handles margins
 savefig.pad_inches   : 0.02
 savefig.transparent  : False
 pdf.fonttype         : 42

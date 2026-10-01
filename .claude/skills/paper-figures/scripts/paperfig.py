@@ -38,10 +38,10 @@ CYCLE = [C[k] for k in ("blue", "vermillion", "orange", "green", "pink", "sky")]
 
 # Journal column widths in inches (final printed size).
 WIDTHS = dict(
-    single=3.35,      # 85 mm: AGU/Copernicus/IOP single column
+    single=3.35,      # 85 mm: AGU / Copernicus / IOP single column
     onehalf=4.9,      # 125 mm
-    double=7.0,       # 178 mm: full page width
-    copernicus2=6.89, # 175 mm two-column Copernicus
+    double=7.0,       # 178 mm: IOP (ERL), AGU, Elsevier full width
+    copernicus2=6.89, # 175 mm: Copernicus (ACP, AMT, GMD, ...) full width
 )
 
 
@@ -76,17 +76,24 @@ def panel_labels(axs, loc="upper right", start="a", dx=0.0, dy=0.0, **kw):
 
 
 def note(ax, x, y, text, color=None, xy=None, ha="left", va="center",
-         coords="data", lw=0.5, **kw):
+         coords="data", xycoords=None, lw=0.5, **kw):
     """Direct label in the series colour, optionally with a thin leader line to xy.
 
     This replaces most legends: say what a mark is, next to the mark.
+    coords: "data" or "axes" for the text position; xycoords likewise for the
+    leader target (defaults to coords).
     """
     color = color or C["ink"]
-    tf = ax.transAxes if coords == "axes" else ax.transData
+
+    def _tf(c):  # "data" | "axes" | any Transform (e.g. ccrs.PlateCarree()._as_mpl_transform(ax))
+        return ax.transAxes if c == "axes" else ax.transData if c == "data" else c
+
     kw.setdefault("fontsize", mpl.rcParams["font.size"] - 0.5)
     if xy is None:
-        return ax.text(x, y, text, color=color, ha=ha, va=va, transform=tf, **kw)
-    return ax.annotate(text, xy=xy, xytext=(x, y), textcoords=tf if coords == "axes" else "data",
+        return ax.text(x, y, text, color=color, ha=ha, va=va, transform=_tf(coords), **kw)
+    xyc = xycoords or coords
+    return ax.annotate(text, xy=xy, xytext=(x, y),
+                       xycoords=_tf(xyc), textcoords=_tf(coords),
                        color=color, ha=ha, va=va,
                        arrowprops=dict(arrowstyle="-", color=color, lw=lw,
                                        shrinkA=1, shrinkB=1.5), **kw)
@@ -100,8 +107,8 @@ def label_line(ax, line, x, text=None, dy=0.0, ha="left", va="bottom", **kw):
                 ha=ha, va=va, **kw)
 
 
-def shade(ax, intervals, color=None, alpha=0.28, label=None, labels=None,
-          label_y=0.98, **kw):
+def shade(ax, intervals, color=None, alpha=0.28, labels=None,
+          label_y=0.98, label_color=None, **kw):
     """Light vertical bands marking events/regimes; draws beneath data.
 
     Repeat on every stacked panel so the bands read as one through the figure.
@@ -111,7 +118,22 @@ def shade(ax, intervals, color=None, alpha=0.28, label=None, labels=None,
         ax.axvspan(a, b, color=color, alpha=alpha, lw=0, zorder=0)
         if labels:
             ax.text((a + b) / 2, label_y, labels[i], transform=ax.get_xaxis_transform(),
-                    ha="center", va="top", color=C["blue"], fontsize=mpl.rcParams["font.size"] - 1)
+                    ha="center", va="top", color=label_color or C["grey"], fontsize=mpl.rcParams["font.size"] - 1)
+
+
+def hband(ax, lo, hi, color=None, alpha=0.28, **kw):
+    """Horizontal shaded band (e.g. a flight-level range or regime in y)."""
+    return ax.axhspan(lo, hi, color=color or C["sky"], alpha=alpha, lw=0, zorder=0, **kw)
+
+
+def scalebar(ax, length, label, loc=(0.95, 0.06), color="white", lw=1.5, **kw):
+    """Scale bar for imagery in data units; loc = right end in axes fraction."""
+    x1 = ax.transData.inverted().transform(ax.transAxes.transform(loc))
+    x0 = x1[0] - length
+    ax.plot([x0, x1[0]], [x1[1]] * 2, color=color, lw=lw, solid_capstyle="butt", zorder=5)
+    t = ax.text((x0 + x1[0]) / 2, x1[1], label, color=color, ha="center", va="bottom",
+                fontsize=mpl.rcParams["font.size"] - 1, zorder=5, **kw)
+    return halo(t, color="#222222" if color == "white" else "white")
 
 
 def band(ax, x, lo, hi, color=None, alpha=1.0, **kw):
@@ -144,7 +166,8 @@ def refline(ax, value, axis="y", color=None, ls="--", lw=0.7, text=None,
 
 
 def halo(artist, width=2.0, color="white"):
-    """White outline so text stays legible over data or imagery."""
+    """Outline so text stays legible over data or imagery. White on light
+    backgrounds; on dark satellite scenes use white text with color="#222222"."""
     artist.set_path_effects([patheffects.withStroke(linewidth=width, foreground=color)])
     return artist
 
@@ -165,19 +188,50 @@ def despine(ax, left=False, bottom=False):
         ax.spines["bottom"].set_visible(False); ax.tick_params(bottom=False, which="both")
 
 
-def colorbar(fig, mappable, ax, label, **kw):
-    """Slim colorbar, ticks out, no outline box."""
-    kw.setdefault("fraction", 0.035); kw.setdefault("pad", 0.015); kw.setdefault("aspect", 30)
-    cb = fig.colorbar(mappable, ax=ax, **kw)
+def colorbar(fig, mappable, ax=None, label="", cax=None, side="right",
+             width=0.025, pad=0.015, **kw):
+    """Slim colourbar, ticks out, no outline box.
+
+    Placed as an inset of `ax` (works with fixed-aspect map axes and any layout),
+    or drawn into an explicit `cax`. side: "right" or "bottom".
+    """
+    if cax is None:
+        if side == "right":
+            cax = ax.inset_axes([1 + pad, 0, width, 1])
+        else:
+            cax = ax.inset_axes([0, -pad - width * 3 - 0.08, 1, width * 1.6])
+            kw.setdefault("orientation", "horizontal")
+    cb = fig.colorbar(mappable, cax=cax, **kw)
     cb.outline.set_visible(False)
     cb.ax.tick_params(width=0.5, length=2, which="major")
     cb.ax.minorticks_off()
-    cb.set_label(label)
+    if label:
+        cb.set_label(label)
     return cb
 
 
+def cmap(color, name=None, light="#FFFFFF", n=256):
+    """Single-hue sequential colormap from white (or `light`) to a palette colour."""
+    from matplotlib.colors import LinearSegmentedColormap
+    c = C.get(color, color)
+    return LinearSegmentedColormap.from_list(name or f"to_{color}", [light, c], N=n)
+
+
+def twin(ax, color):
+    """Secondary y-axis for a second quantity. Its spine, ticks and label take the
+    series colour so the pairing is unambiguous; use only when the two series share
+    x and their relation is the point (e.g. coverage vs. traffic)."""
+    ax2 = ax.twinx()
+    ax2.spines["right"].set_visible(True)
+    ax2.spines["right"].set_color(color)
+    ax2.tick_params(axis="y", colors=color, which="both")
+    ax2.yaxis.label.set_color(color)
+    return ax2
+
+
 def save(fig, stem, formats=("pdf", "png"), **kw):
-    """Save vector PDF (journal) + PNG preview. Rasterize dense artists via
+    """Save vector PDF (journal) + PNG preview at the exact figure size (no tight
+    bbox, so the printed width stays the journal width). Rasterize dense artists via
     artist.set_rasterized(True) before calling."""
     for f in formats:
         fig.savefig(f"{stem}.{f}", **kw)
