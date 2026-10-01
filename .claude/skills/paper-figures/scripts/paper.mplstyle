@@ -1,0 +1,81 @@
+# paper.mplstyle — journal figure style measured from Schwartz & Johnston,
+# "The Great Oxidation from a minimal ocean-atmosphere model" (2026).
+# Sizes are for the figure at its FINAL printed size (do not let LaTeX scale it).
+
+# --- type: STIX = Times-like serif with matching math, sits well beside body text
+font.family          : STIXGeneral
+mathtext.fontset     : stix
+font.size            : 7
+axes.labelsize       : 7
+axes.titlesize       : 7
+xtick.labelsize      : 6.5
+ytick.labelsize      : 6.5
+legend.fontsize      : 6
+text.color           : 222222
+axes.labelcolor      : 222222
+
+# --- frame: open L-shaped axes, thin dark spines
+axes.spines.top      : False
+axes.spines.right    : False
+axes.linewidth       : 0.6
+axes.edgecolor       : 222222
+axes.facecolor       : none
+axes.grid            : False
+axes.axisbelow       : True
+axes.titlepad        : 3
+axes.labelpad        : 2
+axes.xmargin         : 0.01
+axes.ymargin         : 0.03
+axes.prop_cycle      : cycler('color', ['0072B2', 'D55E00', 'E69F00', '009E73', 'CC79A7', '56B4E9', '6E6E6E', '000000'])
+
+# --- ticks: outward, short, with minor ticks
+xtick.direction      : out
+ytick.direction      : out
+xtick.major.size     : 2.5
+ytick.major.size     : 2.5
+xtick.minor.size     : 1.4
+ytick.minor.size     : 1.4
+xtick.major.width    : 0.6
+ytick.major.width    : 0.6
+xtick.minor.width    : 0.45
+ytick.minor.width    : 0.45
+xtick.major.pad      : 1.8
+ytick.major.pad      : 1.8
+xtick.minor.visible  : True
+ytick.minor.visible  : True
+xtick.color          : 222222
+ytick.color          : 222222
+
+# --- marks: one medium weight for data, thinner for everything else
+lines.linewidth      : 1.1
+lines.markersize     : 3
+lines.markeredgewidth: 0.6
+lines.solid_capstyle : butt
+lines.dash_capstyle  : butt
+lines.dashed_pattern : 3.7, 1.6
+lines.dotted_pattern : 0.8, 1.3
+lines.dashdot_pattern: 5.1, 1.3, 0.8, 1.3
+patch.linewidth      : 0.6
+hatch.linewidth      : 0.5
+errorbar.capsize     : 1.5
+scatter.edgecolors   : face
+
+# --- legends: rare, frameless, compact
+legend.frameon       : False
+legend.handlelength  : 1.6
+legend.handletextpad : 0.5
+legend.borderaxespad : 0.3
+legend.labelspacing  : 0.3
+legend.columnspacing : 1.0
+
+# --- output: vector PDF with embedded TrueType text (editable, crisp)
+figure.dpi           : 150
+savefig.dpi          : 600
+savefig.bbox         : standard   # keep the exact journal width; constrained layout handles margins
+savefig.pad_inches   : 0.02
+savefig.transparent  : False
+pdf.fonttype         : 42
+ps.fonttype          : 42
+svg.fonttype         : none
+image.interpolation  : nearest
+image.resample       : False
